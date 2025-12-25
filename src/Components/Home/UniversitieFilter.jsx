@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
   ArrowRight,
@@ -141,7 +141,7 @@ export default function UniversitieFilter() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100 relative flex flex-col"
+                className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-300 relative flex flex-col"
               >
                 <div className="flex justify-center absolute top-1 right-1">
                   {u.status === 'Not Eligible' ? (
@@ -149,7 +149,7 @@ export default function UniversitieFilter() {
                       <X size={20} /> Not Eligible
                     </span>
                   ) : (
-                    <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
                       <Check size={20} /> Eligible
                     </span>
                   )}
@@ -238,53 +238,78 @@ export default function UniversitieFilter() {
           <div className="fixed bottom-6 right-6">
             <button
               onClick={() => setShowCompare(true)}
-              className="bg-indigo-600 text-white px-6 py-3 rounded-full shadow-xl hover:bg-indigo-700"
+              className="bg-rose-600 text-white px-6 py-3 rounded-full shadow-xl hover:bg-rose-700 cursor-pointer"
             >
               Compare Now ({compareList.length})
             </button>
           </div>
         )}
       </div>
-      {showCompare && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white max-w-4xl w-full rounded-2xl p-8 relative">
-            <button
-              onClick={() => setShowCompare(false)}
-              className="absolute top-4 right-4 text-xl"
+      <AnimatePresence>
+        {showCompare && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6 md:p-10"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 40, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 40, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+              className="bg-white max-w-4xl w-full rounded-2xl p-8 relative"
             >
-              ✖
-            </button>
+              <button
+                onClick={() => setShowCompare(false)}
+                className="absolute top-4 right-4 text-xl cursor-pointer hover:text-rose-600 transition-colors duration-100"
+              >
+                ✖
+              </button>
 
-            <h2 className="text-2xl font-bold mb-6 text-center">
-              University Comparison
-            </h2>
+              <h2 className="text-2xl font-bold mb-6 text-center">
+                University Comparison
+              </h2>
 
-            <div className="grid grid-cols-4 gap-4 text-sm text-center">
-              <div className="font-semibold">Feature</div>
-              {compareList.map((u) => (
-                <div key={u.id} className="font-semibold">
-                  {u.name}
-                </div>
-              ))}
+              <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+                <table className="table text-nowrap text-center">
+                  <thead>
+                    <tr className="text-black">
+                      <th>Feature</th>
+                      {compareList.map((list, i) => (
+                        <th key={i}>{list.name}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>GPA Requirement</td>
+                      {compareList.map((list, i) => (
+                        <td key={i}>{list.min_gpa}</td>
+                      ))}
+                    </tr>
 
-              <div>GPA Requirement</div>
-              {compareList.map((u) => (
-                <div key={u.id}>{u.min_gpa}</div>
-              ))}
+                    <tr>
+                      <td>IELTS Requirement</td>
+                      {compareList.map((list, i) => (
+                        <td key={i}>{list.min_ielts}</td>
+                      ))}
+                    </tr>
 
-              <div>IELTS Requirement</div>
-              {compareList.map((u) => (
-                <div key={u.id}>{u.min_ielts}</div>
-              ))}
-
-              <div>Total Tuition</div>
-              {compareList.map((u) => (
-                <div key={u.id}>${u.tuition_fee}</div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+                    <tr>
+                      <td>Total Tuition</td>
+                      {compareList.map((list, i) => (
+                        <td key={i}>$ {list.tuition_fee}</td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
