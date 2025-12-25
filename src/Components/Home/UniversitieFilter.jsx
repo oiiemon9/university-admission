@@ -13,6 +13,7 @@ import {
   X,
 } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 export default function UniversitieFilter() {
   const [universities, setUniversities] = useState([]);
@@ -44,7 +45,7 @@ export default function UniversitieFilter() {
       if (compareList.length < 3) {
         setCompareList([...compareList, uni]);
       } else {
-        alert('You can compare maximum 3 universities');
+        toast.error('You can compare maximum 3 universities');
       }
     }
   };

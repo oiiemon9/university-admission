@@ -12,10 +12,9 @@ export async function POST(req) {
   const u = uni.rows[0];
 
   if (gpa < u.min_gpa || ielts < u.min_ielts) {
-    return Response.json(
-      { message: 'You are not eligible for this university' },
-      { status: 400 }
-    );
+    return Response.json({
+      message: 'You are not eligible for this university',
+    });
   }
 
   await pool.query(
