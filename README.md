@@ -61,7 +61,7 @@ cd admission-bridge
 npm install
 ```
 
-### Create .env.local
+### Create .env
 
 DATABASE_URL=\*\*\*\*
 
