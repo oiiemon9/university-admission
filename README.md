@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Admission Bridge – Full Stack University Admission Platform
 
-## Getting Started
+Admission Bridge is a website where students can find suitable admission opportunities based on their GPA, IELTS score, preferred university and country. According to their preferences, they can also apply to any university of their choice.
 
-First, run the development server:
+## Live Link
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Website: https://admission-bridge.vercel.app/
+
+## Project Overview
+
+> The Admission Bridge is a vertical-slice admission system where students can:
+
+1. Search universities by country & degree
+
+2. Filter in real-time using tuition fee slider, GPA & IELTS
+
+3. Compare universities side-by-side
+
+4. Apply instantly with a validated multi-step form
+
+## Tech Stack
+
+- Frontend: Next.js, Tailwind CSS, Framer Motion
+- Backend: Next.js API Routes
+- Database: PostgreSQL
+- Deployment: Vercel + Railway
+
+## Dependencies
+
+```
+ "dependencies": {
+    "axios": "^1.13.2",
+    "daisyui": "^5.5.14",
+    "framer-motion": "^12.23.26",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^0.562.0",
+    "next": "16.1.1",
+    "pg": "^8.16.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hook-form": "^7.69.0",
+    "react-toastify": "^11.0.5",
+    "sweetalert2": "^11.26.17"
+  },
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+"devDependencies": {
+  "@tailwindcss/postcss": "^4.1.18",
+  "eslint": "^9",
+  "eslint-config-next": "16.1.1",
+  "tailwindcss": "^4.1.18"
+}
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Local Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+git clone https://github.com/oiiemon9/admission-bridge.git
+cd admission-bridge
+npm install
+```
 
-## Learn More
+### Create .env.local
 
-To learn more about Next.js, take a look at the following resources:
+DATABASE_URL=\*\*\*\*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Run SQL Seed File
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+psql -U username -d dbname -f seed.sql
+```
 
-## Deploy on Vercel
+### Start Development Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm run dev
+```

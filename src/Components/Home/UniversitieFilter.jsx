@@ -21,8 +21,8 @@ export default function UniversitieFilter() {
   const [universities, setUniversities] = useState([]);
   const [minFee, setMinFee] = useState(3000);
   const [maxFee, setMaxFee] = useState(30000);
-  const [gpa, setGpa] = useState(3.0);
-  const [ielts, setIelts] = useState(6.0);
+  const [gpa, setGpa] = useState(0);
+  const [ielts, setIelts] = useState(0);
   const [compareList, setCompareList] = useState([]);
   const [showCompare, setShowCompare] = useState(false);
   const [search, setSearch] = useState('');
@@ -87,7 +87,7 @@ export default function UniversitieFilter() {
                   type="number"
                   step="0.1"
                   min="0"
-                  max="4.0"
+                  max="5.0"
                   value={gpa}
                   onChange={(e) => setGpa(parseFloat(e.target.value) || 0)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
