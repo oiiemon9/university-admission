@@ -8,6 +8,7 @@ import {
   ArrowRight,
   BookOpenCheck,
   Check,
+  GitCompareArrows,
   GraduationCap,
   MapPin,
   X,
@@ -38,7 +39,6 @@ export default function UniversitieFilter() {
 
   const handleCompare = (uni) => {
     const exists = compareList.find((u) => u.id === uni.id);
-
     if (exists) {
       setCompareList(compareList.filter((u) => u.id !== uni.id));
     } else {
@@ -235,16 +235,42 @@ export default function UniversitieFilter() {
             ))}
           </div>
         )}
-        {compareList.length >= 2 && (
-          <div className="fixed bottom-6 right-6">
-            <button
-              onClick={() => setShowCompare(true)}
-              className="bg-rose-600 text-white px-6 py-3 rounded-full shadow-xl hover:bg-rose-700 cursor-pointer"
+        <AnimatePresence>
+          {compareList.length >= 2 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{
+                type: 'spring',
+                damping: 18,
+                stiffness: 250,
+                mass: 0.6,
+              }}
+              className="fixed bottom-6 right-6"
             >
-              Compare Now ({compareList.length})
-            </button>
-          </div>
-        )}
+              <button
+                onClick={() => setShowCompare(true)}
+                className="bg-rose-600 text-white px-3 py-3 rounded-full shadow-xl hover:bg-rose-700 flex justify-center items-center cursor-pointer"
+              >
+                <span>
+                  <GitCompareArrows />
+                </span>
+                <motion.span
+                  initial={{ width: 0 }}
+                  animate={{ width: 135 }}
+                  transition={{
+                    delay: 0.5,
+                    ease: 'easeOut',
+                  }}
+                  className="whitespace-nowrap overflow-hidden ms-2"
+                >
+                  Compare Now ({compareList.length})
+                </motion.span>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <AnimatePresence>
         {showCompare && (
