@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Loading() {
   return (
-    <div className="flex justify-center items-center py-10">
+    <div className="flex justify-center py-10 h-screen">
       <Lottie
         className="h-20 w-20"
         animationData={require('../../../public/loadingAnimation.json')}

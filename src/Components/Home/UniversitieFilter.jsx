@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import Loading from '../Loading/Loading';
 
 export default function UniversitieFilter() {
   const [universities, setUniversities] = useState([]);
@@ -25,14 +26,17 @@ export default function UniversitieFilter() {
   const [compareList, setCompareList] = useState([]);
   const [showCompare, setShowCompare] = useState(false);
   const [search, setSearch] = useState('');
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoader(true);
       const res = await fetch(
         `/api/universities?min=${minFee}&max=${maxFee}&gpa=${gpa}&ielts=${ielts}&search=${search}`
       );
       const data = await res.json();
       setUniversities(data);
+      setLoader(false);
     };
     fetchData();
   }, [minFee, maxFee, gpa, ielts, search]);
@@ -127,7 +131,9 @@ export default function UniversitieFilter() {
           </div>
         </motion.div>
 
-        {universities.length === 0 ? (
+        {loader ? (
+          <Loading></Loading>
+        ) : universities.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-500 text-lg">
               No universities match your criteria yet. Try adjusting the

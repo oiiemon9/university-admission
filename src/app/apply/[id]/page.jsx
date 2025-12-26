@@ -105,7 +105,7 @@ export default function ApplyPage() {
                   )}
                 </div>
 
-                <div className="md:col-span-2 grid grid-cols-2 gap-6">
+                <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
                   <div className="bg-rose-50 rounded-xl p-6 border border-slate-200 hover:border-rose-300 transition-colors">
                     <p className="text-sm font-semibold text-slate-600 mb-2">
                       Location
@@ -114,7 +114,7 @@ export default function ApplyPage() {
                       {university.country}
                     </p>
                   </div>
-                  <div className="bg-rose-50 rounded-xl p-6 border border-slate-200 hover:border-rose-300 transition-colors">
+                  <div className=" bg-rose-50 rounded-xl p-6 border border-slate-200 hover:border-rose-300 transition-colors">
                     <p className="text-sm font-semibold text-slate-600 mb-2">
                       Degree Level
                     </p>
@@ -138,7 +138,7 @@ export default function ApplyPage() {
                       {university.min_gpa}
                     </p>
                   </div>
-                  <div className="col-span-2 bg-rose-50 rounded-xl p-6 border border-slate-200 hover:border-rose-300 transition-colors">
+                  <div className="md:col-span-2 bg-rose-50 rounded-xl p-6 border border-slate-200 hover:border-rose-300 transition-colors">
                     <p className="text-sm font-semibold text-slate-600 mb-2">
                       Min. IELTS Score
                     </p>
